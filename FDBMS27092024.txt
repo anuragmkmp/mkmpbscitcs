@@ -1,0 +1,57 @@
+/** Practice SQL Questions for FDBMS 27-09-2024 Friday **/
+
+/*Create table student*/
+create table student(
+rollno int,
+fname char(20),mname char(20),
+lname char(20),
+address varchar(50),
+phone varchar(10),
+class char(6));
+
+/*Inserting Records into table student*/
+insert into student values(1,'A','A','A','Dombivali','5555522222','FYIT');
+insert into student values(2,'A','A','A','Dombivali','5555522222','FYIT');
+insert into student values(3,'A','A','A','Dombivali','5555522222','FYCO');
+insert into student values(4,'A','A','A','Dombivali','5555522222','FYBCO');
+insert into student values(5,'A','A','A','Dombivali','5555522222','FYIT');
+insert into student values(6,'A','A','A','Dombivali','5555522222','FYBCO');
+insert into student values(7,'A','A','A','Dombivali','5555522222','FYIT');
+insert into student values(8,'A','A','A','Dombivali','5555522222','FYCS');
+insert into student values(9,'A','A','A','Dombivali','5555522222','FYIT');
+insert into student values(10,'A','A','A','Dombivali','5555522222','FYCS');
+insert into student values(11,'B','B','B','Dombivali','5555522222','FYCS');
+
+/*Create table class*/
+CREATE TABLE CLASS(class_id char(6),class_name char(20),mentor_id int);
+
+/*Adding Primary Keys*/
+alter table student add primary key(rollno);
+alter table class add primary key(class_id);
+
+/*Inserting Records into table Class*/
+insert into class values('FYBCOM','First Year B.Com',1);
+insert into class values('FYIT','First Year B.Sc. IT',2);
+insert into class values('FYCS','First Year B.Sc. CS',3);
+
+/*Joining Tables Student and Class*/
+select s.rollno,
+concat(s.fname," ",s.mname," ",s.lname) 'Full_Name',
+s.address,s.phone,s.class,
+c.class_name,c.mentor_id
+from student s
+join
+class c
+on
+s.class=c.class_id;
+
+/* Get Student Count as per Class */
+select class,count(class) 'Student_Count' from student group by class;
+
+update student set class='FYBCO' where rollno=3;
+
+
+/* Creating view for getting Latest Count */
+create view Student_Count as
+select class,count(class) 'Student_Count' from student group by class;
+
