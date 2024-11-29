@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+body{
+  background-image: url("/img/collegephoto30.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color:black;
+}
+
 .alldiv {
     display: flex;
     height: 100%;
