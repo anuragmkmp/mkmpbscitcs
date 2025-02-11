@@ -1,0 +1,56 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package syit_miltiple;
+
+class Test
+{
+    void showTest()
+    {
+        System.out.println("Show Test");  
+    }
+}
+
+class Base extends Test
+{
+    void showBase()
+    {
+        System.out.println("Show Base");  
+    }
+}
+
+interface Intf
+{
+  void showIntf();
+}
+
+interface My
+{
+  void showMy();
+}
+
+class Derived extends Base implements Intf,My
+{
+    public void showIntf()
+    {
+        System.out.println("I am in showIntf");   
+    }
+    
+    public void showMy()
+    {
+        System.out.println("I am in showMy");   
+    }
+}
+
+public class Multiple extends Derived
+{
+    public static void main(String[] args)
+    {
+        Multiple m=new Multiple();
+        m.showTest();
+        m.showBase();
+        m.showIntf();
+        m.showMy();
+    }
+}
