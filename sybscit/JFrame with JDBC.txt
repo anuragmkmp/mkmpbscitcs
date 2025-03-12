@@ -1,0 +1,53 @@
+import java.awt.FlowLayout;  
+import javax.swing.*;  
+import java.sql.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.*;
+
+public class JFrameExample
+{  
+    public static void main(String s[])
+    {  
+        JFrame f=new JFrame("GUI with JDBC");  
+        
+        final JTextField tempid=new JTextField();  
+        tempid.setBounds(50,50, 150,20);
+        
+        final JTextField tename=new JTextField();  
+        tename.setBounds(50,100, 150,20);
+
+        JButton b=new JButton("Insert Data");  
+        b.setBounds(50,150,95,30);  
+        b.addActionListener(new ActionListener(){  
+
+        public void actionPerformed(ActionEvent e)
+        {  
+            try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/syit", "root", "");
+            Statement stmti = con.createStatement();
+            
+            int empid=Integer.parseInt(tempid.getText());
+            String ename=tename.getText();
+            
+            stmti.executeUpdate("insert into emp values("+empid+",'"+ename+"')");
+            JOptionPane.showMessageDialog(f, "D  ,ata Inserted....");
+
+            con.close();
+            }
+            catch(Exception ex)
+            {
+              JOptionPane.showMessageDialog(f, "Error Occured....");
+            }
+        }  
+        });
+        
+        f.add(b); f.add(tempid); f.add(tename);
+        f.setSize(400,400);  
+        f.setLayout(null);  
+        f.setVisible(true);     
+    }  
+}    
